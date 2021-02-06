@@ -14,7 +14,7 @@ def main():
         choice = ui.display_menu_get_choice(menu)
         action = menu.get_action(choice)
         action()
-        if choice == 'Q':
+        if choice == 'Q' or 'q':
             break
 
 
@@ -26,6 +26,7 @@ def create_menu():
     menu.add_option('4', 'Show Read Books', show_read_books)
     menu.add_option('5', 'Show All Books', show_all_books)
     menu.add_option('6', 'Change Book Read Status', change_read)
+    menu.add_option('7', 'Delete Book', delete_book)
     menu.add_option('Q', 'Quit', quit_program)
 
     return menu
@@ -34,11 +35,17 @@ def create_menu():
 def add_book():
     try:
         new_book = ui.get_book_info()
-        new_book.save()
+        new_book.save()\
     except:
         print("You cannot two duplicate books")    
-    
 
+def delete_book():
+    try:
+        which_book = ui.get_book_id()
+        BookStore._delete_book(which_book)
+    except:
+        print('Error: Book Not Found')
+    
 def show_read_books():
     read_books = store.get_books_by_read_value(True)
     ui.show_books(read_books)
@@ -66,6 +73,7 @@ def change_read():
     book = store.get_book_by_id(book_id)  
     new_read = ui.get_read_value()     
     book.read = new_read 
+    ui.message(f"You have {'read' if book.read else 'not read' } \"{book.title}\" by {book.author}")
     book.save()
     
 
