@@ -1,6 +1,6 @@
 """ Program to create and manage a list of books that the user wishes to read, and books that the user has read. """
 
-from bookstore import Book, BookStore, BookError
+from bookstore import Book, BookStore
 from menu import Menu
 import ui
 
@@ -35,8 +35,8 @@ def add_book():
     new_book = ui.get_book_info()
     try:
         new_book.save()
-    except BookError as error:
-        print(error)    
+    except:
+        print("You cannot two duplicate books")    
     
 
 def show_read_books():
