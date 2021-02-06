@@ -195,7 +195,8 @@ class BookStore:
                     
             con.close()            
             
-            return book 
+            else: 
+                return None
 
 
         def book_search(self, term):
