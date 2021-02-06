@@ -17,7 +17,7 @@ class Book:
 
         self.bookstore = BookStore()
 
-
+    """ When you enter a book ID either update the book or add book to the database """
     def save(self):
         if self.id:
             self.bookstore._update_book(self)
